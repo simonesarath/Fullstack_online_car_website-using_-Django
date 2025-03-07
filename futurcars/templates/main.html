@@ -1,0 +1,918 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Rides Website</title>
+
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+
+    <!-- botstrap cdn css link-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- swiper cdn link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!--unicons cdn link-->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+    <!-- font awesome cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- aos library css link-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!--custom css file link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+    <!-- header section starts -->
+
+    <header data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-duration="1500" class="header">
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <a href="" class="logo"><span>Futur</span> Car <i class="fa-solid fa-car fa-beat-fade"
+                style="color: #1925cc;"></i></a>
+
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#vehicles">Vehicles</a>
+            <a href="#services">Services</a>
+            <a href="#featured">Featured</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div id="login-btn">
+            <button class="btn" id="form-open">SignIn</button>
+            <i class="fas fa-user"></i>
+        </div>
+
+    </header>
+    <!-- header section ends -->
+
+    <!-- home from signin and signup section starts -->
+
+    <section class="home">
+        <div class="form_container">
+            <i class="uil uil-times form_close"></i>
+
+            <!--signin form section starts -->
+            <div class="form login_form">
+
+                <form  method="post" action="{% url 'home' %}">
+
+                    <h2>Sign In</h2>
+
+                    {% csrf_token %}
+
+                    <div class="input_box">
+                        <input type="email" placeholder="Enter Your Mail" name="useremail" id="useremail" autofocus required>
+                        <i class="uil uil-envelope-alt email"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Enter Your Password" name="userpassword" id="userpassword" autofocus required>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+
+                    <div class="option_field">
+                        <span class="checkbox">
+                            <input type="checkbox" id="check">
+                            <label for="check">Remember Me</label>
+                        </span>
+                        <a href="" class="forgot_pw">Forgot Password</a>
+                    </div>
+
+                    <button class="button">Login Now</button>
+
+                    <div class="login_signup"> You Don't have an Account? Please <a href="" id="signup">SignUp Here</a></div>
+                </form>
+            </div>
+            
+            <div class="messages">
+                {% for message in messages %}
+                <p style="color: #4169E1;">{{ message }}</p>
+                {% endfor %}
+            </div>
+
+            <!--signup form -->
+            <div class="form signup_form">
+                <form  method="post" action="{% url 'login' %}"> 
+                    
+                    <h2>Sign Up</h2>
+
+                    {% csrf_token %}
+
+                    <div class="input_box">
+                        <input type="username" placeholder="Enter Your Name" name="username" id="username" autofocus required>
+                        <i class="uil uil-user email"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="email" placeholder="Enter Your Email" name="useremail" id="useremail" autofocus required>
+                        <i class="uil uil-envelope-alt email"></i>
+                    </div>
+                    <!-- <div class="input_box">
+                        <input type="text" placeholder="Enter Your PhoneNumber" name="userphonenumber" id="" required>
+                        <i class="uil uil-phone-alt email"></i>
+                    </div> -->
+                    <div class="input_box">
+                        <input type="password" placeholder="Create Password" name="userpassword" id="userpassword" autofocus required>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="Enter Your ConfirmPassword" name="userconfirmpassword" id="userconfirmpassword" autofocus required>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+
+                    <button class="button">SignUp Now</button>
+
+                    <div class="login_signup"> Already have an Account? Please <a href="" id="login"> Login Here </a></div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!--login form section end -->
+
+
+    <!-- home section starts -->
+
+    <section class="home" id="home">
+
+        <h1 class="home-parallax" data-aos="zoom-out-right" data-speed="-2">You Need A Ride! Find Your Luxury Cars</h1>
+        <img class="home-parallax" data-speed="5" src="{% static 'images/home-img.png' %}" alt="">
+        <a href="#vehicles" class="btn home-parallax" data-speed="7"> Explore Cars </a>
+
+    </section>
+    <!-- home section end -->
+
+    <!-- icons section starts-->
+
+    <section data-aos="zoom-out-up" class="icons-container">
+
+        <div class="icons">
+            <i class="fas fa-home"></i>
+            <div class="content">
+                <h3>150+</h3>
+                <p>Branches</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-car"></i>
+            <div class="content">
+                <h3>4770+</h3>
+                <p>Cars Sold</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-users"></i>
+            <div class="content">
+                <h3>590+</h3>
+                <p>Happy Clients</p>
+            </div>
+        </div>
+
+        <div class="icons">
+            <i class="fas fa-car"></i>
+            <div class="content">
+                <h3>890+</h3>
+                <p>New Cars</p>
+            </div>
+        </div>
+    </section>
+    <!-- icons section end-->
+
+    <!-- vehicles section starts -->
+
+    <section class="vehicles" id="vehicles">
+
+        <h1 class="heading"> Popular <span> Vehicles </span></h1>
+
+        <div class=" swiper vehicles-slider">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle1.png' %}" alt="">
+                    <div class="content">
+                        <h3>Mercedes-Bendz SUV</h3>
+                        <div class="price"><span>Price: </span>Rs.1.39 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2020
+                            <span class="fas fa-circle"></span>Systematic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>183mph
+                        </p>
+                        <a href="/index1" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle2.png' %}" alt="">
+                    <div class="content">
+                        <h3>Mercedes-Bendz A-Class</h3>
+                        <div class="price"><span>Price: </span>Rs.1 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2021
+                            <span class="fas fa-circle"></span>Systematic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>200mph
+                        </p>
+                        <a href="/index2" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle3.png' %}" alt="">
+                    <div class="content">
+                        <h3>Toyota Tundra Camry Hybrid</h3>
+                        <div class="price"><span>Price: </span>Rs.75.90 - 76.90 Lakh</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2022
+                            <span class="fas fa-circle"></span>Customize
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>235mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle4.png' %}" alt="">
+                    <div class="content">
+                        <h3>BMW i8</h3>
+                        <div class="price"><span>Price: </span>Rs.2.55 - 4 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2023
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="/index3" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle5.png' %}" alt="">
+                    <div class="content">
+                        <h3>BMW x5</h3>
+                        <div class="price"><span>Price: </span>Rs.2.55 - 4 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2022
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle6.png' %}" alt="">
+                    <div class="content">
+                        <h3>Tesla Model-x</h3>
+                        <div class="price"><span>Price: </span>Rs.2.55 - 5 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2024
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Electric
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle7.png' %}" alt="">
+                    <div class="content">
+                        <h3>Red Ferrari</h3>
+                        <div class="price"><span>Price: </span>Rs.2.55 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2022
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>300mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle8.png' %}" alt="">
+                    <div class="content">
+                        <h3>Chevrolet Camaro</h3>
+                        <div class="price"><span>Price: </span>Rs.2.5 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2023
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>270mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div> 
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle9.png' %}" alt="">
+                    <div class="content">
+                        <h3>Lamborghini Aventador</h3>
+                        <div class="price"><span>Price: </span>Rs.2.55 - 4 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2024
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle10.png' %}" alt="">
+                    <div class="content">
+                        <h3>Red Mclaren 540c Coupe</h3>
+                        <div class="price"><span>Price: </span>Rs.3 - 4 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2023
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle11.png' %}" alt="">
+                    <div class="content">
+                        <h3>Rolls Royce Spectre</h3>
+                        <div class="price"><span>Price: </span>Rs.15 - 30 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2023
+                            <span class="fas fa-circle"></span>Automatic
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/vehicle12.png' %}" alt="">
+                    <div class="content">
+                        <h3>Lexus RX 450h SUV</h3>
+                        <div class="price"><span>Price: </span>Rs.15 - 50 Cr</div>
+                        <p>
+                            New
+                            <span class="fas fa-circle"></span>2023
+                            <span class="fas fa-circle"></span>Customize
+                            <span class="fas fa-circle"></span>Petrol
+                            <span class="fas fa-circle"></span>250mph
+                        </p>
+                        <a href="" class="btn">Check Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+        </div>
+    </section>
+    <!-- vehicles section end -->
+
+    <!-- service section starts -->
+
+    <section class="services" id="services">
+
+        <h1 class="heading">Our <span>Services</span></h1>
+
+        <div class="box-container">
+
+            <div data-aos="fade-up" class="box">
+                <i class="fas fa-car"></i>
+                <h3>Car Selling</h3>
+                <p>In this coursework I have look at car and the product that I have chosen for my sales coursework is BMW 7 series car because I think that, this car is in demand at the moment and I hope to sell it to my customers.</p>
+                <a href="" class="btn">Read More</a>
+            </div>
+
+            <div data-aos="fade-down" class="box">
+                <i class="fas fa-tools"></i>
+                <h3>Parts Repair</h3>
+                <p>A car repair is required if something breaks down with your motor vehicle. It can be any number of things that go wrong with your automobile. Sometimes a car repair is large and can be expensive to have completed by a mechanic and sometimes it is more of a minor repair. </p>
+                <a href="" class="btn">Read More</a>
+            </div>
+
+            <div data-aos="fade-right" class="box">
+                <i class="fas fa-car-crash"></i>
+                <h3>Car Insurance</h3>
+                <p>There is also a type of coverage referred to ask medical payments coverage. If an accident occurs, this coverage will help repay the driver or passengers for medical expenses caused by the accident. </p>
+                <a href="" class="btn">Read More</a>
+            </div>
+
+            <div data-aos="fade-left" class="box">
+                <i class="fas fa-battery"></i>
+                <h3>Battery Replacement</h3>
+                <p>A car battery replacement gives a new life to your vehicle and maximizes its lifespan and yield high performance. By changing the car battery you get rid of frequent battery discharge problems.</p>
+                <a href="" class="btn">Read More</a>
+            </div>
+
+            <div data-aos="fade-up-right" class="box">
+                <i class="fas fa-gas-pump"></i>
+                <h3>Oil Change</h3>
+                <p>The benefits of changing your oil on time are numerous. Regular oil changes improve your engine's performance, extend its longevity, and help your car achieve its peak gas mileage. </p>
+                <a href="" class="btn">Read More</a>
+            </div>
+
+            <div data-aos="fade-up-left" class="box">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>A 24/7 support line will often offer a substantial positive ROI, simply because it means customers are more likely to stay with a business that helps them immediately. </p>
+                <a href="" class="btn">Read More</a>
+            </div>
+        </div>
+
+    </section>
+    <!-- service section end -->
+
+    <!-- featured section starts -->
+
+    <section class="featured" id="featured">
+
+        <h1 class="heading"><span>Featured</span>Cars</h1>
+
+        <div class="swiper featured-slider">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car1.png' %}" alt="">
+                    <h3>Ferrari 488 GTB</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 3.88 C</div>
+                    <a href="/index11" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car2.png' %}" alt="">
+                    <h3>Red Porche 911 Coupe</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 2- 5 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car3.png' %}" alt="">
+                    <h3>Black Bentley Continental Coupe</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs.3 - 4 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car4.png' %}" alt="">
+                    <h3>Rolls Royce Ghost</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs.4 - 5 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car5.png' %}" alt="">
+                    <h3>Orange Land Rover SUV</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 5 - 10 C</div>
+                    <a href="/index33" class="btn">Check Out</a>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+        </div>
+
+        <div class="swiper featured-slider">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car6.png' %}" alt="">
+                    <h3>Jaguar XJ,XE</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs.10 - 20 C</div>
+                    <a href="/index22" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car7.png' %}" alt="">
+                    <h3>Ford Mustang Galpin Rocket</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 5 - 10 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car8.png' %}" alt="">
+                    <h3>Bugatti veyron</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 6 - 10 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car9.png' %}" alt="">
+                    <h3>Audi RS7 Quattro</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 50 - 80 lakh</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/car10.png' %}" alt="">
+                    <h3>Aston Martin Vantage</h3>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="price"> Rs. 4 - 10 C</div>
+                    <a href="" class="btn">Check Out</a>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+        </div>
+    </section>
+    <!-- featured section end -->
+
+    <!-- newsletter section starts -->
+
+    <section class="newsletter">
+
+        <h3>Subscribe For Latest Updates And News</h3>
+
+        <p>While they’re known for their automotive reporting, Auto News also provides several newsletters covering Automotive views, breaking news, and summaries of the day's top stories. Stay informed through a trusted source. </p>
+
+        <form action="">
+            <input type="email" placeholder="Enter Your Email" required name="" id="">
+            <input type="Submit" class="subscripe" name="" id="">
+        </form>
+    </section>
+    <!-- newsletter section end-->
+
+    <!-- review section starts -->
+
+    <section class="reviews" id="reviews">
+
+        <h1 class="heading"> Client's <span> Review </span></h1>
+
+        <div class="swiper reviews-slider">
+
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person1.png' %}" alt="">
+                    <div class="content">
+                        <p>We've purchased two cars from Leo at Excellence Auto and highly recommend. From the moment we walked in the door we were treated exceptionally well. If you're looking for a vehicle you'll be in good hands with Leo. I would recommend them to my family and close friends.</p>
+                        <h3>John Doe</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person2.png' %}" alt="">
+                    <div class="content">
+                        <p>We've purchased two cars from Leo at Excellence Auto and highly recommend. From the moment we walked in the door we were treated exceptionally well. If you're looking for a vehicle you'll be in good hands with Leo. I would recommend them to my family and close friends.</p>
+                        <h3>John Wlliams</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person3.png' %}" alt="">
+                    <div class="content">
+                        <p>Highly recommend stopping into this dealership. They have a nice selection from all the brands you can think of! Angel provided great customer service, and was able to fulfill my needs when looking for my next car!</p>
+                        <h3>Will Smith</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person4.png' %}" alt="">
+                    <div class="content">
+                        <p>Highly recommend stopping into this dealership. They have a nice selection from all the brands you can think of! Angel provided great customer service, and was able to fulfill my needs when looking for my next car!</p>
+                        <h3>Jackie Chan</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person5.png' %}" alt="">
+                    <div class="content">
+                        <p>Had a great experience with Excellence Auto Direct. Our sales associate Hakeem was attentive and knowledgeable. Dora who was helping our sales associate was also attentive and talkative and made us feel right at home. Amazing customer service all around. They also have a nice selection of higher end vehicles.</p>
+                        <h3>Tiger Shroff</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person6.png' %}" alt="">
+                    <div class="content">
+                        <p>Had a great experience with Excellence Auto Direct. Our sales associate Hakeem was attentive and knowledgeable. Dora who was helping our sales associate was also attentive and talkative and made us feel right at home. Amazing customer service all around. They also have a nice selection of higher end vehicles.</p>
+                        <h3>Ulisses</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person7.png' %}" alt="">
+                    <div class="content">
+                        <p>We've purchased two cars from Leo at Excellence Auto and highly recommend. From the moment we walked in the door we were treated exceptionally well. If you're looking for a vehicle you'll be in good hands with Leo. I would recommend them to my family and close friends.</p>
+                        <h3>John Abrahum</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person8.png' %}" alt="">
+                    <div class="content">
+                        <p>Highly recommend stopping into this dealership. They have a nice selection from all the brands you can think of! Angel provided great customer service, and was able to fulfill my needs when looking for my next car!</p>
+                        <h3>Victor</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide box">
+                    <img src="{% static 'images/person9.png' %}" alt="">
+                    <div class="content">
+                        <p>Had a great experience with Excellence Auto Direct. Our sales associate Hakeem was attentive and knowledgeable. Dora who was helping our sales associate was also attentive and talkative and made us feel right at home. Amazing customer service all around. They also have a nice selection of higher end vehicles.</p>
+                        <h3>Aashna</h3>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="swiper-pagination"></div>
+
+        </div>
+    </section>
+    <!-- review section end -->
+
+    <!-- contact section starts-->
+
+    <section class="contact" id="contact">
+
+        <h1 class="heading"><span>Contact</span>Us</h1>
+
+        <div class="row">
+
+            <iframe data-aos="zoom-in-up" class="map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63188.98981047828!2d77.37383220114735!3d8.171303015951791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b04f0dfc0ddc7b7%3A0x809a9e32a95d3ed1!2sNagercoil%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1720796830510!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                <form action="{% url 'submit_contact' %}" method="post" class="was-validated" data-aos="flip-up">
+                    
+                    <h3>Get In Touch -</h3>
+                    {% csrf_token %}
+                    <input name="name" id="name" type="text" placeholder="Enter Your Name" class="box" required>
+
+                    <input name="email" id="email" type="email" placeholder="Enter Your Email" class="box" required>
+
+                    <input name="phonenumber" id="phonenumber" type="text" placeholder="Enter Your Phone Number" class="box" required>
+
+                    <textarea name="message" id="message" placeholder="New Message" class="box" cols="30" rows="10" required></textarea>
+
+                    <input type="Submit" value="Send Message" class="btn">
+                </form>
+        </div>
+    </section>
+    <!-- contact section end-->
+
+    <!-- footer section starts -->
+
+    <section class="footer">
+
+        <div data-aos="fade-up" data-aos-duration="3000" class="box-container">
+
+            <div class="box">
+                <h3>Our Branches</h3>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> India </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> France </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> America </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> Australia </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> Russia </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> London </a>
+            </div>
+
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="#home"> <i class="fas fa-arrow-right"></i> Home </a>
+                <a href="#vehicles"> <i class="fas fa-arrow-right"></i> Vehicles </a>
+                <a href="#services"> <i class="fas fa-arrow-right"></i> Services </a>
+                <a href="#featured"> <i class="fas fa-arrow-right"></i> Featured </a>
+                <a href="#reviews"> <i class="fas fa-arrow-right"></i> Reviews </a>
+                <a href="#contact"> <i class="fas fa-arrow-right"></i> Contact </a>
+            </div>
+
+            <div class="box">
+                <h3>Buying Guide</h3>
+                <a href=""> <i class="fas fa-arrow-right"></i> Book A Text Drive </a>
+                <a href=""> <i class="fas fa-arrow-right"></i> Nearest Showroom </a>
+                <a href=""> <i class="fas fa-arrow-right"></i> Finance </a>
+            </div>  
+            
+            <div class="box">
+                <h3>Technology</h3>
+                <a href=""> <i class="fas fa-arrow-right"></i> Electric mobility </a>
+                <a href=""> <i class="fas fa-arrow-right"></i> About Mercedes me </a>
+                <a href=""> <i class="fas fa-arrow-right"></i> Connect services </a>
+                <a href=""> <i class="fas fa-arrow-right"></i> Service warranty terms <br> and conditions </a>
+            </div>     
+
+            <div class="box">
+                <h3>Contact Links</h3>
+                <a href=""> <i class="fas fa-phone"></i> +1234567890 </a>
+                <a href=""> <i class="fas fa-phone"></i> +9163235689 </a>
+                <a href=""> <i class="fas fa-phone"></i> +919597911317 </a>
+                <a href=""> <i class="fas fa-envelope"></i> simone123@gmail.com </a>
+                <a href=""> <i class="fas fa-map-marker-alt"></i> Abu Dhabi, Dubai - 12567</a>
+            </div>  
+
+            <div class="box">
+                <h3>Social Media Links</h3>
+                <a href="https://www.facebook.com"> <i class="fab fa-facebook-f"></i> Facebook </a>
+                <a href="https://x.com"> <i class="fab fa-twitter"></i> Twitter </a>
+                <a href="https://instagram.com"> <i class="fab fa-instagram"></i> Instagram </a>
+                <a href="https://in.linkedin.com/"> <i class="fab fa-linkedin"></i> Linkedin </a>
+                <a href="https://www.pinterest.com/"> <i class="fab fa-pinterest"></i> Pinterest </a>
+                <a href="https://wa.me/+919597911317?text= ꧁𓊈𒆜Hi!,Welcome𒆜𓊉꧂, Thank you for choosing Futur Car .  
+                We are delighted to have you as a new customer. 
+                If you have any questions or need support, please feel free to ask. We are here to help! *ੈ✩‧₊˚༺☆༻*ੈ✩‧₊˚ "> <i class="fa-brands fa-whatsapp"></i> Whatsapp </a>
+                <a href="https://www.youtube.com/"> <i class="fa-brands fa-youtube"></i> Youtube </a>
+            </div> 
+        </div>
+
+        <div class="credit"> © 2024. FuturCar India Pvt. Ltd. All Rights Reserved (provider) </div>
+    </section>
+
+    <!-- footer section end -->
+
+
+
+
+
+
+
+
+    <!-- swiper link -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- custom js file link -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    <!-- botstrap cdn js link-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- aos library js link -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

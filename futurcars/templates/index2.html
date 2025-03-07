@@ -1,0 +1,124 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercedes-Bendz A-Class</title>
+
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
+
+    <!-- botstrap cdn css link-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style2.css' %}">
+
+</head>
+
+<body>
+
+    <!-- header section starts-->
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+
+            </div>
+            <div class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#vehicles">Vehicles</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <form action="{% url 'book_car' %}" method="POST">
+                    {% csrf_token %}
+                    
+                    {{ form.as_p }}
+                    <button type="submit"> Book Now </button>
+                </form>
+                <button type=""> Test Drive </button>
+                <!-- <button><a href="main.html">Home</a></button> -->
+            </div>
+        </div>
+
+        {% if messages %}
+        <ul>
+           {% for message in messages %}
+               <p style="color: #FF00FF;">{{ message }}</p>
+           {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="main_content">
+            <div class="content">
+                <h1>Mercedes <br> <span>Bendz A-Class</Bendz-SUV></span> </h1>
+                <p>Mercedes only uses the highest quality parts for their vehicles – especially the Benz.</p>
+                <p>Price: ₹ 1.5 Cr </p>
+            </div>
+            <div class="car_img" style="width: 140%; height: 130%; padding-top: 200px; padding-bottom: 110px; padding-right: 500px;">
+                
+            </div>
+        </div>
+
+        <div class="futures">
+            <div class="engine">
+                <img src="{% static 'images/engine1.png' %}" alt="">
+                <p> 625 HP (500 KW) High-Performance M Twin Cylinder Turbo Engine </p>
+            </div>
+            <div class="transmission">
+                <img src="{% static 'images/trans1.png' %}" alt="">
+                <p> M xDrive With Active M Differebtial Auto 10 Speed Gear Box </p>
+            </div>
+            <div class="power">
+                <img src="{% static 'images/suspen1.png' %}" alt="">
+                <p> 460 KW/625 HP, 650 NM, 0-100 Km/H In 3.2 s </p>
+            </div>
+            <div class="brake">
+                <img src="{% static 'images/wheel1.png' %}" alt="">
+                <p> 4 Wheel Alloy With 20mm Disc Brake </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- botstrap cdn js link-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+   
+    <!-- gsap cdn link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+<script>
+
+    var t1 = gsap.timeline();
+    
+    t1.from(".logo" , {
+        y: -500,
+        duration: 1.8,
+        scale: 0.6,
+        rotate: 580,
+    })
+
+    t1.from(".main_content" , {
+        opacity: 0,
+        duration:1,
+        x: -100,
+    })
+
+    t1.from(".car_img", {
+       x: 700,
+       duration: 1.8,
+       scale: 0.6,
+       y: -90,
+    })
+</script>
+</html>
